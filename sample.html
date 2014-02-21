@@ -2,29 +2,77 @@
 <html lang="jp">
 <head>
     <meta charset="utf-8" />
+    <title>Code Cimenter</title>
     <link rel="stylesheet" type="text/css" href="./css/codeCommenter.css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="./js/codeCommenter.js"></script>
     <style type="text/css">
-    <!--
+        html,body{
+            height: 100%;
+            width: 100%;
+        }
         #content{
-            position: fixed;
-            top: 100px;
-            width: 800px;
-            height: 600px;
-            left: 200px;
+            width: 100%;
+            height: 100%;
+            display: table;
+        }
+        #centering{
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+        }
+        #frame{
+            display: inline-block;
+            width: 900px;
+            height: 500px;
+            padding: 0;
+            background-color: rgba(0,0,0,0.3);
+        }
+        #header{
+            display: inline-block;
+            margin: 0 0;
+            width: 900px;
+            height: 30px;
+            color: white;
+            background-color: rgba(0,0,0,0.2);
+        }
+        #main{
+            display: inline-block;
+            margin: 0;
+            width: 900px;
+            height: 440px;
+            overflow: scroll;
+            text-align: left;
+            color: white;
+            background-color: rgba(50,50,50,0.6);
+        }
+        #main > p{
+            padding-left: 10px;
+        }
+        #main > pre{
+            background-color: white;
+            color: black;
+        }
+        #footer{
+            display: inline-block;
+            margin: 0;
+            width: 900px;
+            height: 30px;
+            background-color: rgba(0,0,0,0.2);
         }
         #code{
-            font-size: 30px;
+            font-size: 20px;
         }
     -->
     </style>
     <script type="text/javascript">
     <!--
     $(document).ready(function(){
+        //$(document.body).colorLine({lines:10,height:30,number:20});
         $('#code').comment({
-            click :function (commentText){
-                alert(commentText);
+            click :function (prePointer,commentText){
+                prePointer.next = $('<p/>').text(commentText);
+                document.getElementById('code').insertBefore(prePointer.next.get()[0],prePointer.current.get()[0].nextSibling);
             }
         });
     }); 
@@ -33,7 +81,31 @@
 </head>
 <body>
     <div id="content">
-        <div id="code">        Good coding.</div>
+        <div id="centering">
+            <div id="frame">
+                <div id="header">Code Commenter</div>
+                <div id="main">
+                    <h1>Code Commenterとは</h1>
+                    <p>貧弱なpreタグにコメントをすることができるようになります.</p>
+                    <p>導入方法は簡単!<br />
+                        以下のような表示ができます.
+                        
+                        <div id="code">    $(document).ready(function(){
+        $('#code').comment({
+            click :function (prePointer,commentText){
+                prePointer.next = $('<p/>').text(commentText);
+                document.getElementById('code').insertBefore(
+                    prePointer.next.get()[0],
+                    prePointer.current.get()[0].nextSibling
+                );
+            }
+        });
+    });                 </div>
+                    </p>
+                </div>
+                <div id="footer"></div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

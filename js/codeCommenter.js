@@ -3,7 +3,7 @@
 
     $.fn.comment = function (option){
         var OPTION_DEFAULT = {
-            click:function (str){}
+            click:function (prePointer,str){}
         };
         option = $.extend(OPTION_DEFAULT,option);
         var content = this;
@@ -16,6 +16,7 @@
         $.each(lines,function (){
             /* set code */
             var pre = $(LINE_ELEMENT);
+            var prePointer = {current :pre,next :void 0};
             pre.text(this == '' ? ' ':this);
             /* comment line */
             var commentLine = $('<div/>');
@@ -35,7 +36,11 @@
             /* callback */
             commentButton.click(
                 function (){
-                    option.click(commentText.val());
+                    option.click(prePointer,commentText.val());
+                    if(prePointer.next != void 0){
+                        prePointer.current = prePointer.next;
+                        prePointer.next = void 0;
+                    }
                 }
             );
             content.append(pre);
