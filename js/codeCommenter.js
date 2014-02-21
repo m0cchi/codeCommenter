@@ -11,21 +11,23 @@
         var lines = text.split('\n');
         content.html('');
         content.addClass('code-commenter-content');
+        var lastLine = void 0;
+        var lastPre = void 0;
         $.each(lines,function (){
             /* set code */
             var pre = $(LINE_ELEMENT);
             pre.text(this == '' ? ' ':this);
             /* comment line */
-            var commentline = $('<div/>');
+            var commentLine = $('<div/>');
             var commentText = $('<input/>');
             commentText.attr('type','text');
-            commentline.append(commentText);
+            commentLine.append(commentText);
             var commentButton = $('<button/>');
             commentButton.text('comment');
-            commentline.append(commentButton);
+            commentLine.append(commentButton);
             pre.click(
                 function (){
-                    commentline.slideToggle();
+                    commentLine.slideToggle();
                     commentText.slideToggle();
                     commentButton.slideToggle();
                 }
@@ -37,8 +39,12 @@
                 }
             );
             content.append(pre);
-            content.append(commentline);
+            content.append(commentLine);
+            lastPre = pre;
+            lastLine = commentLine;
         });
+        lastLine.css('border-bottom','0 dashed black');
+        lastPre.css('border-bottom','0 dashed black');
         return this;
     }
 })(jQuery);
