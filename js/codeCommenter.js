@@ -1,7 +1,11 @@
 (function($) {
     var LINE_ELEMENT = '<pre/>'
 
-    $.fn.comment = function (){
+    $.fn.comment = function (option){
+        var OPTION_DEFAULT = {
+            click:function (str){}
+        };
+        option = $.extend(OPTION_DEFAULT,option);
         var content = this;
         var text = content.text();
         var lines = text.split('\n');
@@ -26,12 +30,15 @@
                     commentButton.slideToggle();
                 }
             );
+            /* callback */
+            commentButton.click(
+                function (){
+                    option.click(commentText.val());
+                }
+            );
             content.append(pre);
             content.append(commentline);
         });
-        //console.log();
         return this;
     }
-
-    
 })(jQuery);

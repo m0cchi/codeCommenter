@@ -9,6 +9,7 @@
     display: none;
     height: 50px;
     padding: 10px;
+    border-bottom: 1px dashed black;
     margin: 0;
 }
 

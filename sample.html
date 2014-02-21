@@ -14,20 +14,26 @@
             height: 600px;
             left: 200px;
         }
+        #code{
+            font-size: 30px;
+        }
     -->
     </style>
     <script type="text/javascript">
     <!--
     $(document).ready(function(){
-        $('#content').comment();
+        $('#code').comment({
+            click :function (commentText){
+                alert(commentText);
+            }
+        });
     }); 
     -->
     </script>
 </head>
 <body>
     <div id="content">
-        Hello,World
-        Juck
+        <div id="code">        Good coding.</div>
     </div>
 </body>
 </html>
