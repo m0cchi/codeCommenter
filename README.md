@@ -1,4 +1,4 @@
-codeCommenter
+Code Commenter
 =============
 
 jQuery Plugin
