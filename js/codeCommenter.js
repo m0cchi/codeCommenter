@@ -1,7 +1,7 @@
 (function($) {
     var LINE_ELEMENT = '<pre/>'
 
-    $.fn.comment = function(){
+    $.fn.comment = function (){
         var content = this;
         var text = content.text();
         var lines = text.split('\n');
@@ -13,10 +13,17 @@
             pre.text(this == '' ? ' ':this);
             /* comment line */
             var commentline = $('<div/>');
-            //commentline.text(this);
+            var commentText = $('<input/>');
+            commentText.attr('type','text');
+            commentline.append(commentText);
+            var commentButton = $('<button/>');
+            commentButton.text('comment');
+            commentline.append(commentButton);
             pre.click(
                 function (){
                     commentline.slideToggle();
+                    commentText.slideToggle();
+                    commentButton.slideToggle();
                 }
             );
             content.append(pre);
