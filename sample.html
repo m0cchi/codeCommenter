@@ -86,14 +86,14 @@
                 <div id="header">Code Commenter</div>
                 <div id="main">
                     <h1>Code Commenterとは</h1>
-                    <p>貧弱なpreタグにコメントをすることができるようになります.</p>
+                    <p>preタグにコメントをすることができるようになります.</p>
                     <p>導入方法は簡単!<br />
                         以下のような表示ができます.
                         
                         <div id="code">    $(document).ready(function(){
         $('#code').comment({
             click :function (prePointer,commentText){
-                prePointer.next = $('<p/>').text(commentText);
+                prePointer.next = $('&lt;p/&gt;').text(commentText);
                 document.getElementById('code').insertBefore(
                     prePointer.next.get()[0],
                     prePointer.current.get()[0].nextSibling
